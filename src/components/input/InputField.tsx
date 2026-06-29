@@ -1,5 +1,12 @@
+import { useState } from "react";
+import type { User } from "../../types/userTypes";
+
 function InputField() {
-  return <div></div>;
+  // function handelSubmit() {
+  //   console.log("submited");
+  // }
+
+  return <form></form>;
 }
 
 export default InputField;

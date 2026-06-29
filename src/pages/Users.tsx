@@ -1,5 +1,11 @@
+import InputField from "../components/input/InputField";
+
 function Users() {
-  return <div>hallo from overview</div>;
+  return (
+    <div>
+      <InputField />
+    </div>
+  );
 }
 
 export default Users;
