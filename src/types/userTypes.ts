@@ -1,8 +1,8 @@
-export type Gender = "male" | "female" | "keine Angabe";
+export type Gender = "male" | "female" | "";
 
 export interface UserForm {
   username: string;
-  birthDate: string;
+  birthday: string;
   email: string;
   postAddress: string;
   phone: string;
