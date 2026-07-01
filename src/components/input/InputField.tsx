@@ -1,41 +1,36 @@
 import { useState } from "react";
-import type { User, UserForm } from "../../types/userTypes";
+import type { UserForm } from "../../types/userTypes";
+import "./InputField.scss";
+
+const initialUserForm: UserForm = {
+  username: "",
+  birthday: "",
+  gender: "",
+  email: "",
+  postAddress: "",
+  phone: "",
+  website: "",
+};
 
 function InputField() {
-  const [emailError, setEmailError] = useState("");
-  const [user, setUser] = useState<UserForm>({
-    username: "",
-    birthday: "",
-    gender: "",
-    email: "",
-    postAddress: "",
-    phone: "",
-    website: "",
-  });
+  const [user, setUser] = useState(initialUserForm);
 
   function handelSubmit(event: React.FormEvent) {
     event.preventDefault();
     console.log(user);
+    setUser(initialUserForm);
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = event.target;
     setUser((prev) => ({ ...prev, [name]: value }));
-    if (name === "email") {
-      if (value === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        setEmailError("");
-      } else {
-        setEmailError("Ungültige E-Mail-Adresse");
-      }
-    }
-    console.log(event.target);
   }
 
   return (
     <form onSubmit={handelSubmit} className="inputs">
       <div className="items">
         <label className="items__label" htmlFor="username">
-          Username
+          Username:
         </label>
         <input required className="items__input" type="text" id="username" name="username" value={user.username} onChange={handleChange} />
       </div>
@@ -59,7 +54,6 @@ function InputField() {
           Email
         </label>
         <input required className="items__input" name="email" value={user.email} onChange={handleChange} type="email" id="email" />
-        {emailError && <p>{emailError}</p>}
       </div>
 
       <div className="items">

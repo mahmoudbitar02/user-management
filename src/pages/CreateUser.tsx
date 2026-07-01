@@ -1,5 +1,11 @@
+import InputField from "../components/input/InputField";
+
 function CreateUser() {
-  return <div>hallo from create</div>;
+  return (
+    <div>
+      <InputField />
+    </div>
+  );
 }
 
 export default CreateUser;
