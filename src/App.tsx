@@ -1,26 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Roots from "./pages/Root/Roots";
-import Users from "./pages/Users/Users";
-import CreateUser from "./pages/Create/CreateUser";
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
+import { router } from "./routes/Router";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Roots />,
-      children: [
-        {
-          path: "/users",
-          element: <Users />,
-        },
-        {
-          path: "/create",
-          element: <CreateUser />,
-        },
-      ],
-    },
-  ]);
   return (
     <>
       <RouterProvider router={router}></RouterProvider>

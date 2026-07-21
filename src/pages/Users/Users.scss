@@ -1,0 +1,81 @@
+@use "../../pages/Root/variables" as *;
+
+.users {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.user-card {
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(40, 159, 207, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: 0.25s;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(40, 159, 207, 0.18);
+    cursor: pointer;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  &__avatar {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid rgba(40, 159, 207, 0.18);
+  }
+
+  &__name {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.4rem;
+  }
+
+  &__gender {
+    display: inline-block;
+    margin-top: 0.35rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    background: rgba(40, 159, 207, 0.12);
+    color: #289fcf;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    background: #eaf3ff;
+
+    strong {
+      color: #374151;
+      font-size: 1rem;
+    }
+
+    span {
+      color: #6b7280;
+      text-align: right;
+    }
+  }
+}
