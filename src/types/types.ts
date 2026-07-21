@@ -19,3 +19,25 @@ export type UserAction =
   | { type: "ADD_USER"; payload: User }
   | { type: "UPDATE_USER"; payload: User }
   | { type: "DELETE_USER"; payload: string };
+
+export type InputFieldProps = {
+  inputId: string;
+  label: string;
+  inputType: string;
+  inputName: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  value: string;
+  placeholder?: string;
+};
+
+export const InitialUser: User = {
+  id: "",
+  name: "",
+  email: "",
+  gender: "Keine Eingaben",
+  dob: "",
+  phone: "",
+  address: "",
+  web: "",
+  image: "",
+};
