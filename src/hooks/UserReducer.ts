@@ -9,7 +9,7 @@ export function UserReducer(state: User[], action: UserAction) {
       return [...state, action.payload];
 
     case "DELETE_USER":
-      return state.filter((user) => user.id === action.payload);
+      return state.filter((user) => user.id !== action.payload);
 
     case "UPDATE_USER":
       return state.map((user) => (user.id === action.payload.id ? action.payload : user));

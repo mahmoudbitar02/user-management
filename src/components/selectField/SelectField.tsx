@@ -7,8 +7,9 @@ function SelectField({ inputId, label, inputName, handleChange, value }: InputFi
 
       <select className="input-control" id={inputId} name={inputName} onChange={handleChange} value={value}>
         <option value="">Select an option</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
+        <option value="Männlich">Männlich</option>
+        <option value="Weiblich">Weiblich</option>
+        <option value="Keine Eingaben">Keine Eingaben</option>
       </select>
     </div>
   );

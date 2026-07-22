@@ -4,13 +4,24 @@ import femaleImage from "../../assets/images/female.png";
 import "./Users.scss";
 
 function Users() {
-  const { users } = useUserContext();
+  const { users, userDispatch } = useUserContext();
+
+  function deleteUser(e: React.MouseEvent<HTMLButtonElement>, id: string) {
+    e.stopPropagation();
+    userDispatch({ type: "DELETE_USER", payload: id });
+  }
 
   return (
     <div className="users">
       {users.map((user) => (
         <div className="user-card" key={user.id}>
-          <button className="user-card__button" title="delete">
+          <button
+            onClick={(e) => {
+              deleteUser(e, user.id);
+            }}
+            className="user-card__button"
+            title="delete"
+          >
             X
           </button>
 

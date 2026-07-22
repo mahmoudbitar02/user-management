@@ -1,4 +1,5 @@
-export type Gender = "" | "Männlich" | "Weiblich" | "Keine Eingaben";
+import { z } from "zod";
+export type Gender = "Männlich" | "Weiblich" | "Keine Eingaben";
 
 export type User = {
   id: string;
@@ -41,3 +42,27 @@ export const InitialUser: User = {
   web: "",
   image: "",
 };
+
+export type UserFormProps = {
+  onSubmit: (user: User) => void;
+};
+
+export const genderSchema = z.enum(["Männlich", "Weiblich", "Keine Eingaben"], {
+  message: "Bitte wähle eine Option aus",
+});
+
+export const userScheme = z.object({
+  name: z.string().min(2, "Der Name muss mindestens 2 zeichen lang sein"),
+  email: z.string().email("Ungültige E-Mailaddresse"),
+  gender: genderSchema,
+  dob: z.string().min(1, "Geburtsdatum ist erforderlich"),
+  web: z.string().url("Ungültige Website-URL"),
+  image: z.string().optional(),
+  address: z.string().min(3, "Addresse ist erforderlich"),
+  phone: z
+    .string()
+    .min(6, "Telefonnummer zu kurz")
+    .regex(/^[0-9+\s/-]+$/, "Ungültige Telefonnummer"),
+});
+
+export type UserFormData = z.infer<typeof userScheme>;

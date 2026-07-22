@@ -6,7 +6,7 @@ type UserContextType = {
   userDispatch: React.Dispatch<UserAction>;
 };
 
-export const UserContext = createContext<UserContextType | null>(null);
+export const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function useUserContext() {
   const context = useContext(UserContext);

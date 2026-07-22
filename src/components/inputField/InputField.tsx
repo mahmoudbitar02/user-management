@@ -5,7 +5,15 @@ function InputField({ inputId, label, inputType, inputName, handleChange, value,
   return (
     <div className="input-field">
       <label htmlFor={inputId}>{label}</label>
-      <input id={inputId} type={inputType} name={inputName} placeholder={placeholder} value={value} onChange={handleChange} />
+      <input
+        className="input-control "
+        id={inputId}
+        type={inputType}
+        name={inputName}
+        placeholder={placeholder}
+        value={value}
+        onChange={handleChange}
+      />
     </div>
   );
 }
