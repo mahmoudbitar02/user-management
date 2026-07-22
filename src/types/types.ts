@@ -64,5 +64,3 @@ export const userScheme = z.object({
     .min(6, "Telefonnummer zu kurz")
     .regex(/^[0-9+\s/-]+$/, "Ungültige Telefonnummer"),
 });
-
-export type UserFormData = z.infer<typeof userScheme>;

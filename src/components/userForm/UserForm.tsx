@@ -7,6 +7,7 @@ import "./UserForm.scss";
 
 function UserForm({ onSubmit }: UserFormProps) {
   const [value, setValue] = useState<User>(InitialUser);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = event.target;
@@ -15,14 +16,38 @@ function UserForm({ onSubmit }: UserFormProps) {
       ...prev,
       [name]: value,
     }));
+
+    const fieldSchema = userScheme.shape[name as keyof typeof userScheme.shape];
+    const result = fieldSchema.safeParse(value);
+
+    setErrors((prev) => {
+      if (!result.success) {
+        return { ...prev, [name]: result.error.issues[0].message };
+      }
+      const newErrors = { ...prev };
+      delete newErrors[name];
+      return newErrors;
+    });
   }
 
   function submitData(event: React.FormEvent) {
     event.preventDefault();
     const result = userScheme.safeParse(value);
 
-    console.log("it works", result);
-    console.log("aktueller gender", value.gender);
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      const formattedError: Record<string, string> = {};
+
+      Object.entries(fieldErrors).forEach(([field, message]) => {
+        if (message && message.length > 0) {
+          formattedError[field] = message[0];
+        }
+      });
+
+      setErrors(formattedError);
+      return;
+    }
+    setErrors({});
 
     const submittedUser: User = {
       id: String(Math.random()),
@@ -40,6 +65,24 @@ function UserForm({ onSubmit }: UserFormProps) {
     setValue(InitialUser);
     alert("created User");
   }
+
+  function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+    const imageUrl = URL.createObjectURL(file);
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setValue((prev) => ({
+        ...prev,
+        image: imageUrl,
+      }));
+    };
+
+    reader.readAsDataURL(file);
+  }
   return (
     <form className="user-form" onSubmit={submitData}>
       <h1 className="user-form__title">Create User</h1>
@@ -49,13 +92,7 @@ function UserForm({ onSubmit }: UserFormProps) {
 
         <label>
           Upload Image
-          <input
-            type="file"
-            accept="image/*"
-            onChange={() => {
-              console.log("image");
-            }}
-          />
+          <input type="file" accept="image/*" onChange={handleImage} />
         </label>
       </div>
 
@@ -70,66 +107,85 @@ function UserForm({ onSubmit }: UserFormProps) {
             handleChange={handleInputChange}
             value={value.name}
           />
+          {errors.name && <span className="error-message">{errors.name}</span>}
         </div>
 
-        <InputField
-          placeholder="Enter email"
-          inputId="email"
-          label="Email"
-          inputType="email"
-          inputName="email"
-          handleChange={handleInputChange}
-          value={value.email}
-        />
+        <div>
+          <InputField
+            placeholder="Enter email"
+            inputId="email"
+            label="Email"
+            inputType="email"
+            inputName="email"
+            handleChange={handleInputChange}
+            value={value.email}
+          />
+          {errors.email && <span className="error-message">{errors.email}</span>}
+        </div>
 
-        <SelectField
-          inputId="gender"
-          label="Gender"
-          inputName="gender"
-          inputType="text"
-          handleChange={handleInputChange}
-          value={value.gender}
-        ></SelectField>
+        <div>
+          <SelectField
+            inputId="gender"
+            label="Gender"
+            inputName="gender"
+            inputType="text"
+            handleChange={handleInputChange}
+            value={value.gender}
+          ></SelectField>
+          {errors.gender && <span className="error-message">{errors.gender}</span>}
+        </div>
 
-        <InputField
-          placeholder="Birthday"
-          inputId="dob"
-          label="Geburtsdatum"
-          inputType="date"
-          inputName="dob"
-          handleChange={handleInputChange}
-          value={value.dob}
-        />
+        <div>
+          <InputField
+            placeholder="Birthday"
+            inputId="dob"
+            label="Geburtsdatum"
+            inputType="date"
+            inputName="dob"
+            handleChange={handleInputChange}
+            value={value.dob}
+          />
+          {errors.dob && <span className="error-message">{errors.dob}</span>}
+        </div>
 
-        <InputField
-          placeholder="Phone"
-          inputId="phone"
-          label="Telefon"
-          inputType="tel"
-          inputName="phone"
-          handleChange={handleInputChange}
-          value={value.phone}
-        />
+        <div>
+          <InputField
+            placeholder="Phone"
+            inputId="phone"
+            label="Telefon"
+            inputType="tel"
+            inputName="phone"
+            handleChange={handleInputChange}
+            value={value.phone}
+          />
+          {errors.phone && <span className="error-message">{errors.phone}</span>}
+        </div>
 
-        <InputField
-          placeholder="Address"
-          inputId="address"
-          label="Adresse"
-          inputType="text"
-          inputName="address"
-          handleChange={handleInputChange}
-          value={value.address}
-        />
+        <div>
+          <InputField
+            placeholder="Address"
+            inputId="address"
+            label="Adresse"
+            inputType="text"
+            inputName="address"
+            handleChange={handleInputChange}
+            value={value.address}
+          />
+          {errors.address && <span className="error-message">{errors.address}</span>}
+        </div>
 
-        <InputField
-          placeholder="Website"
-          inputId="web"
-          label="Website"
-          inputType="url"
-          inputName="web"
-          handleChange={handleInputChange}
-          value={value.web}
-        />
+        <div>
+          <InputField
+            placeholder="Website"
+            inputId="web"
+            label="Website"
+            inputType="url"
+            inputName="web"
+            handleChange={handleInputChange}
+            value={value.web}
+          />
+          {errors.web && <span className="error-message">{errors.web}</span>}
+        </div>
       </div>
 
       <button className="user-form__button" type="submit">

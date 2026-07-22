@@ -27,7 +27,7 @@ function Users() {
 
           <div className="user-card__header">
             <img
-              src={user.gender === "Männlich" ? maleImage : user.gender === "Weiblich" ? femaleImage : maleImage}
+              src={user.image ? user.image : user.gender === "Männlich" ? maleImage : user.gender === "Weiblich" ? femaleImage : maleImage}
               alt={user.name}
               className="user-card__avatar"
             />
@@ -41,27 +41,27 @@ function Users() {
           <div className="user-card__content">
             <div className="user-card__row">
               <strong>🎂 Geburtsdatum</strong>
-              <span>{user.dob || "-"}</span>
+              <span>{new Date(user.dob).toLocaleDateString("de-DE", { year: "numeric", month: "2-digit", day: "2-digit" })}</span>
             </div>
 
             <div className="user-card__row">
               <strong>📧 E-Mail</strong>
-              <span>{user.email || "-"}</span>
+              <span>{user.email}</span>
             </div>
 
             <div className="user-card__row">
               <strong>📍 Adresse</strong>
-              <span>{user.address || "-"}</span>
+              <span>{user.address}</span>
             </div>
 
             <div className="user-card__row">
               <strong>📞 Telefon</strong>
-              <span>{user.phone || "-"}</span>
+              <span>{user.phone}</span>
             </div>
 
             <div className="user-card__row">
               <strong>🌐 Website</strong>
-              <span>{user.web || "-"}</span>
+              <span>{user.web}</span>
             </div>
           </div>
         </div>
