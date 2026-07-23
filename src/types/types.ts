@@ -44,6 +44,7 @@ export const InitialUser: User = {
 };
 
 export type UserFormProps = {
+  user: User | undefined;
   onSubmit: (user: User) => void;
 };
 

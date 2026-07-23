@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../inputField/InputField";
 import { InitialUser, userScheme, type User, type UserFormProps } from "../../types/types";
 import SelectField from "../selectField/SelectField";
 
 import "./UserForm.scss";
 
-function UserForm({ onSubmit }: UserFormProps) {
+function UserForm({ onSubmit, user }: UserFormProps) {
+  useEffect(() => {
+    if (user) {
+      setValue(user);
+    }
+  }, [user]);
+  console.log(user);
   const [value, setValue] = useState<User>(InitialUser);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -50,7 +56,7 @@ function UserForm({ onSubmit }: UserFormProps) {
     setErrors({});
 
     const submittedUser: User = {
-      id: String(Math.random()),
+      id: user?.id || String(Math.random()),
       name: value.name,
       email: value.email,
       gender: value.gender,
@@ -62,8 +68,12 @@ function UserForm({ onSubmit }: UserFormProps) {
     };
     console.log(submittedUser);
     onSubmit(submittedUser);
-    setValue(InitialUser);
-    alert("created User");
+    if (!user) {
+      setValue(InitialUser);
+      alert("created User");
+    } else {
+      alert("updated User");
+    }
   }
 
   function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
@@ -85,7 +95,7 @@ function UserForm({ onSubmit }: UserFormProps) {
   }
   return (
     <form className="user-form" onSubmit={submitData}>
-      <h1 className="user-form__title">Create User</h1>
+      <h1 className="user-form__title">{user ? "Update User" : "Create User"}</h1>
 
       <div className="user-form__image">
         {value.image && <img src={value.image} alt="Preview" />}
@@ -189,7 +199,7 @@ function UserForm({ onSubmit }: UserFormProps) {
       </div>
 
       <button className="user-form__button" type="submit">
-        Create User
+        {user ? "Update User" : "Create User"}
       </button>
     </form>
   );
