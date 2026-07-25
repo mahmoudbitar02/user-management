@@ -4,23 +4,29 @@ import Users from "../pages/Users/Users";
 import CreateUser from "../pages/Create/CreateUser";
 import UpdateUser from "../pages/Update/UpdateUser";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Roots />,
+      children: [
+        {
+          path: "users",
+          element: <Users />,
+        },
+        {
+          path: "create",
+          element: <CreateUser />,
+        },
+        {
+          path: "/edit/:id",
+          element: <UpdateUser />,
+        },
+      ],
+    },
+  ],
+
   {
-    path: "/user-management",
-    element: <Roots />,
-    children: [
-      {
-        path: "users",
-        element: <Users />,
-      },
-      {
-        path: "create",
-        element: <CreateUser />,
-      },
-      {
-        path: "/edit/:id",
-        element: <UpdateUser />,
-      },
-    ],
+    basename: "/user-management-app",
   },
-]);
+);
