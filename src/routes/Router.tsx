@@ -6,19 +6,19 @@ import UpdateUser from "../pages/Update/UpdateUser";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/user-management",
     element: <Roots />,
     children: [
       {
-        path: "/users",
+        path: "users",
         element: <Users />,
       },
       {
-        path: "/create",
+        path: "create",
         element: <CreateUser />,
       },
       {
-        path: "/edit/:id",
+        path: "edit/:id",
         element: <UpdateUser />,
       },
     ],
