@@ -5,7 +5,9 @@ function Roots() {
   return (
     <div className="root-body">
       <aside className="sidebar">
-        <img className="sidebar__image" src={managementImage} alt="User Management Image" />
+        <Link to={"/"}>
+          <img className="sidebar__image" src={managementImage} alt="User Management Image" />
+        </Link>
         <div className="sidebar__items">
           <Link to="users">
             <button className="sidebar__item">All Users</button>

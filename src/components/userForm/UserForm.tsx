@@ -11,7 +11,6 @@ function UserForm({ onSubmit, user }: UserFormProps) {
       setValue(user);
     }
   }, [user]);
-  console.log(user);
   const [value, setValue] = useState<User>(InitialUser);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
