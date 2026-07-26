@@ -105,3 +105,32 @@
     }
   }
 }
+
+.empty-users {
+  margin: 3rem auto;
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  text-align: center;
+
+  background: #fff;
+  border: 2px dashed #d6e4f0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+
+  &__icon {
+    display: block;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin-bottom: 0.75rem;
+    color: #1f2937;
+    font-size: 1.6rem;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
