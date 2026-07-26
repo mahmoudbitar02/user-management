@@ -29,6 +29,6 @@ export const router = createBrowserRouter(
   ],
 
   {
-    basename: "/user-management",
+    basename: "/",
   },
 );
