@@ -3,6 +3,8 @@ import maleImage from "../../assets/images/male.png";
 import femaleImage from "../../assets/images/female.png";
 import type { User } from "../../types/types";
 import "../../pages/Users/Users.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCakeCandles, faEnvelope, faLocationDot, faPhone, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 type UserCardProps = {
   user: User;
@@ -44,27 +46,37 @@ function UserCard({ user }: UserCardProps) {
 
       <div className="user-card__content">
         <div className="user-card__row">
-          <strong>🎂 Geburtsdatum</strong>
+          <strong>
+            <FontAwesomeIcon icon={faCakeCandles} /> Geburtsdatum
+          </strong>
           <span>{new Date(user.dob).toLocaleDateString("de-DE", { year: "numeric", month: "2-digit", day: "2-digit" })}</span>
         </div>
 
         <div className="user-card__row">
-          <strong>📧 E-Mail</strong>
+          <strong>
+            <FontAwesomeIcon icon={faEnvelope} /> E-Mail
+          </strong>
           <span>{user.email}</span>
         </div>
 
         <div className="user-card__row">
-          <strong>📍 Adresse</strong>
+          <strong>
+            <FontAwesomeIcon icon={faLocationDot} /> Adresse
+          </strong>
           <span>{user.address}</span>
         </div>
 
         <div className="user-card__row">
-          <strong>📞 Telefon</strong>
+          <strong>
+            <FontAwesomeIcon icon={faPhone} /> Telefon
+          </strong>
           <span>{user.phone}</span>
         </div>
 
         <div className="user-card__row">
-          <strong>🌐 Website</strong>
+          <strong>
+            <FontAwesomeIcon icon={faGlobe} /> Website
+          </strong>
           <span>{user.web}</span>
         </div>
       </div>

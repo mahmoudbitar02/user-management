@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputField from "../inputField/InputField";
 import { InitialUser, userScheme, type User, type UserFormProps } from "../../types/types";
 import SelectField from "../selectField/SelectField";
-
+import { z } from "zod";
 import "./UserForm.scss";
 
 function UserForm({ onSubmit, user }: UserFormProps) {
@@ -40,7 +40,7 @@ function UserForm({ onSubmit, user }: UserFormProps) {
     const result = userScheme.safeParse(value);
 
     if (!result.success) {
-      const fieldErrors = result.error.flatten().fieldErrors;
+      const fieldErrors = z.flattenError(result.error).fieldErrors;
       const formattedError: Record<string, string> = {};
 
       Object.entries(fieldErrors).forEach(([field, message]) => {

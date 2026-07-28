@@ -5,30 +5,24 @@ import CreateUser from "../pages/Create/CreateUser";
 import UpdateUser from "../pages/Update/UpdateUser";
 import Index from "../pages/index/Index";
 
-export const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <Roots />,
-      children: [
-        { index: true, element: <Index /> },
-        {
-          path: "users",
-          element: <Users />,
-        },
-        {
-          path: "create",
-          element: <CreateUser />,
-        },
-        {
-          path: "/edit/:id",
-          element: <UpdateUser />,
-        },
-      ],
-    },
-  ],
-
+export const router = createBrowserRouter([
   {
-    basename: "/",
+    path: "/",
+    element: <Roots />,
+    children: [
+      { index: true, element: <Index /> },
+      {
+        path: "users",
+        element: <Users />,
+      },
+      {
+        path: "create",
+        element: <CreateUser />,
+      },
+      {
+        path: "/edit/:id",
+        element: <UpdateUser />,
+      },
+    ],
   },
-);
+]);
